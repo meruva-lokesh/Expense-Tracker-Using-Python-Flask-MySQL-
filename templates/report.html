@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Report</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'><text y='60' font-size='60'>💸</text></svg>">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1><a href="/" style="text-decoration: none; color: inherit;">Expense Tracker</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/report">Report</a>
+        </nav>
+    </div>
+</header>
+    <main>
+        <h2>Expense Report</h2>
+        <p>
+            <a href="/export/csv" class="btn">Export as CSV</a>
+            <a href="/export/pdf" class="btn">Export as PDF</a>
+        </p>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+            {% for row in expenses %}
+            <tr>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+            </tr>
+            {% endfor %}
+            {% if not expenses %}
+            <tr><td colspan="4" class="nodata">No expenses to show.</td></tr>
+            {% endif %}
+        </table>
+    </main>
+    <footer>
+        <div class="container">
+            <span>&copy; 2025 Expense Tracker</span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Tracker - Dashboard</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'><text y='60' font-size='60'>💸</text></svg>">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1><a href="/" style="text-decoration: none; color: inherit;">Expense Tracker</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/report">Report</a>
+        </nav>
+    </div>
+</header>
+    <main>
+        <h2>Analytics Dashboard</h2>
+        <div class="charts">
+            <div class="chart-card">
+                <h3>Expense by Category</h3>
+                {% if has_expense_summary %}
+                    <img src="/static/expense_summary.png?{{ range(1000)|random }}" alt="Expense by Category">
+                {% else %}
+                    <p class="nodata">No data to display yet.</p>
+                {% endif %}
+            </div>
+            <div class="chart-card">
+                <h3>Monthly Trend</h3>
+                {% if has_monthly_trend %}
+                    <img src="/static/monthly_trend.png?{{ range(1000)|random }}" alt="Monthly Trend">
+                {% else %}
+                    <p class="nodata">No data to display yet.</p>
+                {% endif %}
+            </div>
+        </div>
+        <h3>Latest Expenses</h3>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+            {% for row in expenses %}
+            <tr>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+            </tr>
+            {% endfor %}
+            {% if not expenses %}
+            <tr><td colspan="4" class="nodata">No expenses logged yet.</td></tr>
+            {% endif %}
+        </table>
+    </main>
+    <footer>
+        <div class="container">
+            <span>&copy; 2025 Expense Tracker</span>
+        </div>
+    </footer>
+</body>
+</html>

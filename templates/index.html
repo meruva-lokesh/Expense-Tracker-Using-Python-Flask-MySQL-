@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Tracker - Home</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'><text y='60' font-size='60'>💸</text></svg>">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .preview img { max-width: 340px; box-shadow: 0 2px 12px #1e90ff0c; border-radius: 10px; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <header>
+    <div class="container">
+        <h1><a href="/" style="text-decoration: none; color: inherit;">Expense Tracker</a></h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/report">Report</a>
+        </nav>
+    </div>
+</header>
+    <main>
+        <section class="upload-section">
+            <h2>Upload a Receipt</h2>
+            <form method="post" enctype="multipart/form-data" id="uploadForm">
+                <input type="file" name="receipt" accept="image/*" required>
+                <button type="submit">Upload & Log Expense</button>
+            </form>
+            <div class="preview" id="preview"></div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class="messages">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </section>
+        <section class="info-section">
+            <h3>How it works?</h3>
+            <ol>
+                <li>Upload a photo of your expense receipt.</li>
+                <li>We extract text, categorize, and log your expenses.</li>
+                <li>See analytics and download reports any time!</li>
+            </ol>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <span>&copy; 2025 Expense Tracker</span>
+        </div>
+    </footer>
+    <script>
+    // Live image preview for uploads
+    document.addEventListener('DOMContentLoaded', function() {
+        const uploadInput = document.querySelector('input[type=file][name=receipt]');
+        const preview = document.getElementById('preview');
+        if (uploadInput && preview) {
+            uploadInput.addEventListener('change', function(e) {
+                preview.innerHTML = '';
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        const img = document.createElement('img');
+                        img.src = ev.target.result;
+                        img.alt = 'Receipt Preview';
+                        preview.appendChild(img);
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
