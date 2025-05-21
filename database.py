@@ -3,9 +3,9 @@ import mysql.connector
 def get_connection():
     return mysql.connector.connect(
         host="localhost",
-        user="expense_user",         # <-- the user you created
-        password="Lokesh@2910",     # <-- the password you set above
-        database="expense_tracker_db"
+        user="root",
+        password="Lokesh@2910",
+        database="expense_db"
     )
 
 def init_db():
