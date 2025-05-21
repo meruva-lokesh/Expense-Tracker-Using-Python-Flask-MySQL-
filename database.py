@@ -5,7 +5,7 @@ def get_connection():
         host="localhost",
         user="root",
         password="Lokesh@2910",
-        database="expense_db"
+        database="expense_db"#it hasnt changed yet so i am doing this commit again
     )
 
 def init_db():
